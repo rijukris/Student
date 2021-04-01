@@ -1,0 +1,42 @@
+<html>
+    <title>
+        Students
+    </title>
+	<head>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="/static/style.css">
+	</head>
+	<body>
+	<br>
+	<table id="studentsTable" class="display" width="100%">
+        <caption class="table-cap">
+            Students
+        </caption>
+        <thead class="table-head">
+            <tr>
+                <th><b>Name</b></th>
+                <th><b>Age</b></th>
+                <th><b>Gender</b></th>
+                <th><b>Mobile</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in data %}
+            <tr>
+                <td>{{ student.first_name }} {{ student.last_name }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.gender }}</td>
+                <td>{{ student.mobile }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+	</table>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#studentsTable').DataTable();
+        });
+    </script>
+	</body>
+</html>
