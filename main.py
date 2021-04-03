@@ -66,6 +66,20 @@ def create_student(mobile):
         return f"ERROR: {e} while creating student for {mobile}"
 
 
+@app.route('/students', methods=['POST'])
+def create_students():
+    try:
+        for student in request.json:
+            sql_str = f"INSERT INTO STUDENT VALUES ('{student['first_name']}', '{student['last_name']}', {int(student['age'])}, '{student['gender']}', '{student['mobile']}')"
+            print(sql_str)
+            cursor.execute(sql_str)
+            db.commit()
+        return f"Created students"
+    except mysql.connector.Error as e:
+        return f"ERROR: {e} while creating students"
+
+
+
 @app.route('/student/<mobile>', methods=['PUT'])
 def update_student(mobile):
     try:
@@ -94,6 +108,17 @@ def delete_student(mobile):
         return f"Deleted student for {mobile}"
     except mysql.connector.Error as e:
         return f"ERROR: {e} while deleting student for {mobile}"
+
+
+@app.route('/students', methods=['DELETE'])
+def delete_students():
+    try:
+        sql_str = "DELETE FROM STUDENT"
+        cursor.execute(sql_str)
+        db.commit()
+        return f"Deleted all students"
+    except mysql.connector.Error as e:
+        return f"ERROR: {e} while deleting students"
 
 
 def main():
